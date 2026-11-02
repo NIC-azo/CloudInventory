@@ -1,0 +1,13 @@
+FROM node:24-bookworm
+
+WORKDIR /app
+
+RUN npm install -g pnpm@10.26.1
+
+COPY package.json pnpm-lock.yaml* ./
+
+RUN pnpm install
+
+COPY . .
+
+EXPOSE 4000

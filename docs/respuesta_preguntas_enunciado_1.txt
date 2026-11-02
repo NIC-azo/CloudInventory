@@ -1,0 +1,92 @@
+Fase 1. Interpretación y análisis del requerimiento
+
+Antes de programar, debes identificar:
+- Qué datos necesita almacenar.
+- Qué operaciones ejecutará.
+- Qué componentes necesitan comunicarse.
+- Qué ocurre cuando PostgreSQL no está disponible.
+Entregable: descripción de requisitos, modelo de datos inicial y diagrama de comunicación.
+
+Fase 2. Diseño de arquitectura y comunicación
+
+Determina qué componentes necesita el proyecto y cómo se comunicarán.
+
+Investiga:
+- Qué función tiene el backend.
+- Qué función tiene PostgreSQL.
+- Cómo funciona una conexión TCP hacia un puerto.
+- Qué significa localhost.
+- Cómo funciona el DNS interno de Docker Compose.
+- Qué diferencia hay entre una red interna y un puerto publicado.
+Entregable: diagrama de arquitectura, puertos, protocolos y variables de configuración necesarias.
+
+Fase 3. Selección de tecnologías y dependencias
+
+Investiga las dependencias que necesitas para construir los componentes.
+
+Debes justificar la selección de:
+- Node.js.
+- Express.
+- TypeScript.
+- Prisma y su configuración de conexión PostgreSQL.
+- Zod para validación de datos.
+- Docker y Docker Compose.
+- PostgreSQL.
+Entregable: listado de dependencias con su propósito y los archivos de configuración que requieren.
+
+Fase 4. Preparación del entorno
+
+Configura el entorno para que el proyecto pueda ejecutarse de manera reproducible.
+
+Debes preparar:
+- Estructura inicial de carpetas.
+- package.json y archivo de bloqueo de dependencias.
+- tsconfig.json.
+- .env y .env.example.
+- .gitignore.
+- Dockerfile.
+- .dockerignore.
+- compose.yaml.
+Utiliza Docker Compose para ejecutar PostgreSQL y backend como servicios independientes.
+
+Entregable: entorno Docker funcional, con persistencia y comunicación interna.
+
+Fase 5. Implementación del backend
+
+Construye las responsabilidades necesarias para:
+- Inicializar Express.
+- Validar las variables de entorno.
+- Configurar una instancia reutilizable de Prisma.
+- Definir el modelo de productos.
+- Gestionar las consultas a PostgreSQL.
+- Implementar las reglas de negocio.
+- Procesar las solicitudes HTTP.
+- Gestionar los errores.
+No se solicita que todos los procesos estén en un único archivo.
+
+Entregable: API REST funcional con operaciones CRUD.
+
+Fase 6. Verificación y pruebas
+
+Ejecuta solicitudes desde Postman, curl o una herramienta equivalente.
+
+Comprueba:
+- Registro de productos.
+- Consulta individual y general.
+- Actualización.
+- Desactivación.
+- Rechazo de datos inválidos.
+- Rechazo de SKU duplicado.
+- Conservación de los datos tras reiniciar PostgreSQL.
+- Comportamiento cuando la base de datos deja de estar disponible.
+Entregable: evidencias de las pruebas y explicación de los resultados.
+
+Fase 7. Relación con AWS
+
+Investiga cómo podrías trasladar la arquitectura local a AWS.
+
+Compara el entorno local con EC2, RDS, EBS y VPC.
+
+Explica qué responsabilidades seguirían correspondiendo al desarrollador y cuáles pasarían a ser administradas por AWS.
+
+Entregable: tabla comparativa y diagrama conceptual de la arquitectura cloud.
