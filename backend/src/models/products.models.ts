@@ -13,6 +13,17 @@ class ProductModel {
         });
     };
 
+    getProduct = async (sku: string) => {
+        return await prismaInstance.products.findUnique({
+            where: {
+                SKU: sku,
+            },
+            select: {
+                id: true,
+            },
+        });
+    }
+
     createProducts = async (data: CreateProducts) => {
         return await prismaInstance.products.create({
             data: data,
