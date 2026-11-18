@@ -1,5 +1,5 @@
 import prismaInstance from "@/libs/prisma.singleton.js";
-import type { CreateProducts, UpdateProducts } from "@/types/products.types.js";
+import type { CreateProductInput, UpdateProductInput } from "@/schemas/products.schema.js";
 
 class ProductModel {
     getProducts = async () => {
@@ -13,32 +13,55 @@ class ProductModel {
         });
     };
 
-    getProduct = async (sku: string) => {
+    getProductById = async (id: string) => {
+        return await prismaInstance.products.findUnique({
+            where: {
+                id: id,
+            },
+        });
+    };
+
+    getProductBySku = async (sku: string) => {
         return await prismaInstance.products.findUnique({
             where: {
                 SKU: sku,
             },
             select: {
                 id: true,
-            },
-        });
-    }
-
-    createProducts = async (data: CreateProducts) => {
-        return await prismaInstance.products.create({
-            data: data,
-            select: {
-                id: true,
+                SKU: true,
             },
         });
     };
 
-    updateProducts = async (id: string, data: UpdateProducts) => {
+    // Mantenemos compatibilidad con getProduct anterior
+    getProduct = async (sku: string) => {
+        return await this.getProductBySku(sku);
+    };
+
+    createProducts = async (data: CreateProductInput) => {
+        return await prismaInstance.products.create({
+            data: data,
+            select: {
+                id: true,
+                SKU: true,
+                nombre: true,
+                precio: true,
+                stock: true,
+            },
+        });
+    };
+
+    updateProducts = async (id: string, data: UpdateProductInput) => {
         return await prismaInstance.products.update({
             where: { id: id },
             data: data,
             select: {
                 id: true,
+                SKU: true,
+                nombre: true,
+                precio: true,
+                stock: true,
+                fecha_actualizacion: true,
             },
         });
     };
@@ -47,7 +70,7 @@ class ProductModel {
         return await prismaInstance.products.update({
             where: { id: id },
             data: { activo: false },
-            select: { id: true },
+            select: { id: true, activo: true },
         });
     };
 }

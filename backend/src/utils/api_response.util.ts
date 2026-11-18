@@ -6,9 +6,17 @@ export class ApiResponse {
     }
 
     static operations(res: Response, message: string, status = 200) {
-        res.status(status).json({ message });
-    }
-    static errorOperation(res: Response, message: string, status = 400) {
         return res.status(status).json({ message });
+    }
+
+    static errorOperation(
+        res: Response,
+        error: string | Record<string, any>,
+        status = 400
+    ) {
+        if (typeof error === "string") {
+            return res.status(status).json({ message: error });
+        }
+        return res.status(status).json(error);
     }
 }
